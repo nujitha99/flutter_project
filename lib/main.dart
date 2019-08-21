@@ -127,7 +127,7 @@ class MyHomePage extends State<MyApp> {
                       ),
                     ),
                     new Icon(
-                      Icons.phone_iphone,
+                      Icons.ac_unit,
                       size: 50.0,
                     ),
                   ],
