@@ -152,9 +152,8 @@ class MyHomePage extends State<MyApp> {
                         ),
                       ),
                     ),
-                    new Icon(
-                      Icons.phone_iphone,
-                      size: 50.0,
+                    new Container(
+                      color: Colors.white,
                     ),
                   ],
                 ),
