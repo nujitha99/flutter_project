@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:flutter_progress_button/flutter_progress_button.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,6 +16,8 @@ class MyApp extends StatefulWidget {
 
 // ignore: must_be_immutable
 class MyHomePage extends State<MyApp> {
+  GlobalKey _globalKey = new GlobalKey();
+  int _state = 0;
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
@@ -120,30 +123,29 @@ class MyHomePage extends State<MyApp> {
                             ),
                             Container(
                               child: CreditCardForm(
-                                onCreditCardModelChange: onCreditCardModelChange,
+                                onCreditCardModelChange:
+                                    onCreditCardModelChange,
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.fromLTRB(130.0, 20.0, 130.0, 20.0),
-
-                              child: ProgressButton(
-                                progressWidget: const CircularProgressIndicator(),
+                              child: new PhysicalModel(
                                 color: Colors.lightGreen,
-                                width: 40,
-                                height: 40,
-
-                                onPressed: () async {
-                                  int score = await Future.delayed(
-                                      const Duration(milliseconds: 3000), () => 42);
-                                  // After [onPressed], it will trigger animation running backwards, from end to beginning
-                                  return () {
-                                    // Optional returns is returning a function that can be called
-                                    // after the animation is stopped at the beginning.
-                                    // A best practice would be to do time-consuming task in [onPressed],
-                                    // and do page navigation in the returned function.
-                                    // So that user won't missed out the reverse animation.
-                                  };
-                                }, defaultWidget: null,
+                                borderRadius: BorderRadius.circular(25.0),
+                                child: new MaterialButton(
+                                  key: _globalKey,
+                                  child: setUpButtonChild(),
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_state == 0) {
+                                        animateButton();
+                                      }
+                                    });
+                                  },
+                                  elevation: 4.0,
+                                  minWidth: double.infinity,
+                                  height: 48.0,
+                                  color: Colors.lightGreen,
+                                ),
                               ),
                             )
                           ],
@@ -158,6 +160,36 @@ class MyHomePage extends State<MyApp> {
                 ),
               ),
             )));
+  }
+
+  Widget setUpButtonChild() {
+    if (_state == 0) {
+      return new Text(
+        "Pay",
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16.0,
+        ),
+      );
+    } else if (_state == 1) {
+      return CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+      );
+    } else {
+      return Icon(Icons.check, color: Colors.white);
+    }
+  }
+
+  void animateButton() {
+    setState(() {
+      _state = 1;
+    });
+
+    Timer(Duration(milliseconds: 3000), () {
+      setState(() {
+        _state = 2;
+      });
+    });
   }
 
   void onCreditCardModelChange(CreditCardModel creditCardModel) {
