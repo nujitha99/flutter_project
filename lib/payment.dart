@@ -15,7 +15,9 @@ class MyApp extends StatefulWidget {
 
 // ignore: must_be_immutable
 class MyHomePage extends State<MyApp> {
-  GlobalKey _globalKey = new GlobalKey();
+  bool checkBox = false;
+  GlobalKey _globalKeyCard = new GlobalKey();
+  GlobalKey _globalKeyMobile = new GlobalKey();
   int _state = 0;
   String cardNumber = '';
   String expiryDate = '';
@@ -112,6 +114,16 @@ class MyHomePage extends State<MyApp> {
                           scrollDirection: Axis.vertical,
                           children: <Widget>[
                             Container(
+                              color: Colors.lightGreen,
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(20.0),
+                              child: Text(
+                                'Total : Rs. 200',
+                                style: TextStyle(
+                                    fontSize: 30.0, color: Colors.black, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Container(
                               child: CreditCardWidget(
                                 cardNumber: cardNumber,
                                 expiryDate: expiryDate,
@@ -131,7 +143,7 @@ class MyHomePage extends State<MyApp> {
                                 color: Colors.blue,
                                 borderRadius: BorderRadius.circular(25.0),
                                 child: new MaterialButton(
-                                  key: _globalKey,
+                                  key: _globalKeyCard,
                                   child: setUpButtonChild(),
                                   onPressed: () {
                                     setState(() {
@@ -152,7 +164,7 @@ class MyHomePage extends State<MyApp> {
                       ),
                     ),
                     new Container(
-                      color: Colors.white,
+                      color: Colors.grey[300],
                       child: SafeArea(
                         child: ListView(
                           scrollDirection: Axis.vertical,
@@ -166,7 +178,7 @@ class MyHomePage extends State<MyApp> {
                             ),
                             Container(
                               child: Text(
-                                '*This facility is currently available only for the Dialog users',
+                                '*This facility is currently available for the Dialog users only',
                                 style: TextStyle(
                                   color: Colors.red,
                                   fontStyle: FontStyle.italic,
@@ -176,7 +188,58 @@ class MyHomePage extends State<MyApp> {
                               ),
                             ),
                             Container(
-                              child: Text('Total : '),
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(80.0),
+                              child: Text(
+                                'Total : Rs. 200',
+                                style: TextStyle(
+                                    fontSize: 30.0, color: Colors.black),
+                              ),
+                            ),
+                            Container(
+                                child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Checkbox(
+                                  activeColor: Colors.black,
+                                  checkColor: Colors.lightGreen,
+                                  value: checkBox,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      checkBox = value;
+                                    });
+                                  },
+                                ),
+                                Container(
+                                  child: Text(
+                                    'I agree to pay using my mobile credit',
+                                    style: TextStyle(color: Colors.black),
+                                    softWrap: true,
+                                  ),
+                                )
+                              ],
+                            )),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                              child: new PhysicalModel(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(25.0),
+                                child: new MaterialButton(
+                                  key: _globalKeyMobile,
+                                  child: setUpButtonChild(),
+                                  onPressed: () {
+                                    setState(() {
+                                      if (_state == 0) {
+                                        animateButton();
+                                      }
+                                    });
+                                  },
+                                  elevation: 4.0,
+                                  minWidth: double.infinity,
+                                  height: 48.0,
+                                  color: Colors.lightGreen,
+                                ),
+                              ),
                             )
                           ],
                         ),
@@ -226,34 +289,5 @@ class MyHomePage extends State<MyApp> {
       cvvCode = creditCardModel.cvvCode;
       isCvvFocused = creditCardModel.isCvvFocused;
     });
-  }
-
-  void _sendDataToSecondScreen(BuildContext context) {
-    String textToSend = textFieldController.text;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SecondScreen(text: textToSend,),
-        ));
-  }
-}
-
-class SecondScreen extends StatelessWidget {
-  final String text;
-
-  // receive data from the FirstScreen as a parameter
-  SecondScreen({Key key, @required this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Second screen')),
-      body: Center(
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-    );
   }
 }
