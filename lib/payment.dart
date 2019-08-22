@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
@@ -154,6 +153,34 @@ class MyHomePage extends State<MyApp> {
                     ),
                     new Container(
                       color: Colors.white,
+                      child: SafeArea(
+                        child: ListView(
+                          scrollDirection: Axis.vertical,
+                          children: <Widget>[
+                            Container(
+                              child: Image.asset(
+                                'assets/dialog.png',
+                                height: 100,
+                                width: 150,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                '*This facility is currently available only for the Dialog users',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 16.0,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                              child: Text('Total : '),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -199,5 +226,34 @@ class MyHomePage extends State<MyApp> {
       cvvCode = creditCardModel.cvvCode;
       isCvvFocused = creditCardModel.isCvvFocused;
     });
+  }
+
+  void _sendDataToSecondScreen(BuildContext context) {
+    String textToSend = textFieldController.text;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SecondScreen(text: textToSend,),
+        ));
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  final String text;
+
+  // receive data from the FirstScreen as a parameter
+  SecondScreen({Key key, @required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Second screen')),
+      body: Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
   }
 }
