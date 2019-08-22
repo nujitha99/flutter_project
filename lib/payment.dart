@@ -129,7 +129,7 @@ class MyHomePage extends State<MyApp> {
                             ),
                             Container(
                               child: new PhysicalModel(
-                                color: Colors.lightGreen,
+                                color: Colors.blue,
                                 borderRadius: BorderRadius.circular(25.0),
                                 child: new MaterialButton(
                                   key: _globalKey,
