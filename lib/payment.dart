@@ -120,7 +120,9 @@ class MyHomePage extends State<MyApp> {
                               child: Text(
                                 'Total : Rs. 200',
                                 style: TextStyle(
-                                    fontSize: 30.0, color: Colors.black, fontWeight: FontWeight.bold),
+                                    fontSize: 30.0,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             Container(
