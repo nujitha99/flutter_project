@@ -38,54 +38,6 @@ class MyHomePage extends State<MyApp> {
             appBar: new AppBar(
               title: Text('Payment'),
             ),
-            drawer: Drawer(
-              child: ListView(
-                children: <Widget>[
-                  DrawerHeader(
-                      child: Column(
-                    children: <Widget>[
-                      Image.asset('assets/bg.jpeg'),
-                    ],
-                  )),
-                  ListTile(
-                    leading: Icon(
-                      Icons.account_circle,
-                    ),
-                    title: Text('Profile'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.flag,
-                    ),
-                    title: Text('Reservation'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.format_list_bulleted,
-                    ),
-                    title: Text('My Bookings'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.contact_phone,
-                    ),
-                    title: Text('Contact Us'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
             body: new DefaultTabController(
               length: 2,
               child: new Scaffold(
@@ -250,7 +202,9 @@ class MyHomePage extends State<MyApp> {
                   ],
                 ),
               ),
-            )));
+            )
+        )
+    );
   }
 
   Widget setUpButtonChild() {
