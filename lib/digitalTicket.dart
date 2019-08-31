@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr/qr.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:train/profile.dart';
+import 'profile.dart';
 
 void main() => runApp(DigitalTicket());
 
@@ -21,8 +23,8 @@ class DigitalTicketState extends State<DigitalTicket> {
           brightness: Brightness.dark,
           primaryColor: Colors.blue[800],
           accentColor: Colors.cyan[600],
-          textTheme: TextTheme(body1: TextStyle(color: Colors.black, fontSize: 20.0))
-      ),
+          textTheme:
+              TextTheme(body1: TextStyle(color: Colors.black, fontSize: 20.0))),
       home: Scaffold(
           appBar: new AppBar(
             title: Text('My Recent Booking'),
@@ -39,7 +41,8 @@ class DigitalTicketState extends State<DigitalTicket> {
                   ),
                   title: Text('Profile'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(context,
+                        new MaterialPageRoute(builder: (context) => Profile()));
                   },
                 ),
                 ListTile(
@@ -73,10 +76,18 @@ class DigitalTicketState extends State<DigitalTicket> {
             ),
           ),
           body: Container(
-            color: Colors.grey[200],
+            color: Colors.white,
             child: SafeArea(
               child: ListView(
                 children: <Widget>[
+                  Container(
+                    child: Image.asset(
+                      'assets/qrbg.jpeg',
+                      height: 150.0,
+                      width: 200.0,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.all(10.0),
                     child: Row(
@@ -84,7 +95,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                         Text(
                           'Name  : ',
                           style: TextStyle(
-                              color: Colors.grey[700],
+                            color: Colors.grey[700],
                           ),
                         ),
                         Text('Alex John')
@@ -98,8 +109,8 @@ class DigitalTicketState extends State<DigitalTicket> {
                         Text(
                           'Start    : ',
                           style: TextStyle(
-                              color: Colors.grey[700],
-                        ),
+                            color: Colors.grey[700],
+                          ),
                         ),
                         Text('Wellawatte')
                       ],
@@ -112,8 +123,8 @@ class DigitalTicketState extends State<DigitalTicket> {
                         Text(
                           'End      : ',
                           style: TextStyle(
-                              color: Colors.grey[700],
-                        ),
+                            color: Colors.grey[700],
+                          ),
                         ),
                         Text('Galle')
                       ],
@@ -126,8 +137,8 @@ class DigitalTicketState extends State<DigitalTicket> {
                         Text(
                           'No. of Seats : ',
                           style: TextStyle(
-                              color: Colors.grey[700],
-                        ),
+                            color: Colors.grey[700],
+                          ),
                         ),
                         Text('1')
                       ],
@@ -144,7 +155,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                               Text(
                                 'Payment : ',
                                 style: TextStyle(
-                                    color: Colors.grey[700],
+                                  color: Colors.grey[700],
                                 ),
                               ),
                               Text('Paid')
@@ -158,7 +169,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                               Text(
                                 'Total : ',
                                 style: TextStyle(
-                                    color: Colors.grey[700],
+                                  color: Colors.grey[700],
                                 ),
                               ),
                               Text('200')
@@ -175,8 +186,8 @@ class DigitalTicketState extends State<DigitalTicket> {
                         Text(
                           'Reference Number : ',
                           style: TextStyle(
-                              color: Colors.grey[700],
-                         ),
+                            color: Colors.grey[700],
+                          ),
                         ),
                         Text(data)
                       ],
