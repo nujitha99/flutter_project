@@ -17,6 +17,13 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  font_awesome_flutter: ^8.5.0
+  datetime_picker_formfield: ^0.4.1
+  numberpicker: ^1.1.0
+  json_annotation: ^3.0.0
+  shared_preferences: any
+  mysql1: ^0.17.0+1
+
   qr_flutter: ^2.0.0
   flutter_credit_card: 0.1.3
   flutter_progress_button: '^0.6.2'
