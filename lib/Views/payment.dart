@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'digitalTicket.dart';
 
 //void main() => runApp(MyApp());
 
@@ -37,7 +38,13 @@ class MyHomePage extends State<MyApp> {
         home: Scaffold(
             appBar: new AppBar(
               title: Text('Payment'),
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }),
             ),
+
             body: new DefaultTabController(
               length: 2,
               child: new Scaffold(
@@ -221,7 +228,14 @@ class MyHomePage extends State<MyApp> {
         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
       );
     } else {
-      return Icon(Icons.check, color: Colors.white);
+      //changes made 9/10/2019 by N.W.R.Amasha
+      //Navigate to the ticket screen
+      return IconButton(
+          icon: Icon(Icons.check),
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> DigitalTicket()));
+          });
     }
   }
 

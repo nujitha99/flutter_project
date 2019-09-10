@@ -17,6 +17,7 @@ import 'package:http/http.dart' as http;
 
 //pages
 import 'digitalTicket.dart';
+import 'Drawer.dart';
 
 
 class MyBookingPage extends StatelessWidget{
@@ -34,6 +35,7 @@ class MyBookingPage extends StatelessWidget{
           title: Text('MyBooking'),
           backgroundColor: Color(0xFF2d3447),
         ),
+        drawer: drawer(),
         body: Center(
           child :Container(
             // height: MediaQuery.of(context).size.height,
@@ -85,7 +87,7 @@ class CardList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-   print(list.length);
+   //print(list.length);
 
     return new Container(
       height: MediaQuery.of(context).size.height/1.5,
@@ -111,7 +113,7 @@ class CardList extends StatelessWidget{
                       children: <Widget>[
                         Text(list[i]['bookingDate'],
                           style: TextStyle(
-                              color: Colors.black38
+                              color: Colors.white54
                           ),),
 
                       ],
@@ -137,7 +139,7 @@ class CardList extends StatelessWidget{
                               ),
                               Text('Departure',
                                 style: TextStyle(
-                                    color: Colors.black38
+                                    color: Colors.white54
                                 ),)
                             ],
                           ),
@@ -154,7 +156,7 @@ class CardList extends StatelessWidget{
                               Text(list[i]['arrivalTime']),
                               Text('Arrival',
                                 style: TextStyle(
-                                    color: Colors.black38
+                                    color: Colors.white54
                                 ),)
                             ],
                           ),
@@ -191,16 +193,20 @@ class CardList extends StatelessWidget{
                     Divider(color: Colors.black38,),
                     Container(
                         alignment: Alignment.bottomRight,
-                        child: OutlineButton(onPressed: (){
-                          Navigator.push(context,  new MaterialPageRoute(
-                              builder: (context) => DigitalTicket())
+                        child: RaisedButton(
+                          onPressed: (){
+                            Navigator.push(context,  new MaterialPageRoute(
+                            builder: (context) => DigitalTicket())
                           );
                         },
                           child: Text('View Ticket',
-                            style: TextStyle(
-                                color: Colors.blue
-                            ),),
-                        )
+                          style: TextStyle(
+                            color: Colors.blue
+                          ),),
+                          color: Colors.black12,
+
+                        ),
+
                     ),
                   ],
                 ),

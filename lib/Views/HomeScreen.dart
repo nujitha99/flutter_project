@@ -17,6 +17,7 @@ import 'package:train/Views/Drawer.dart';
 import 'package:train/Views/TrainDetails.dart';
 import 'package:train/Views/MyBooking.dart';
 import 'SearchDelegate.dart';
+import 'profile.dart';
 
 class HomeScreen extends StatelessWidget{
   @override
@@ -234,7 +235,7 @@ class MenuItems extends StatelessWidget{
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         FlatButton.icon(
             onPressed: (){
@@ -253,7 +254,11 @@ class MenuItems extends StatelessWidget{
             )
         ),
         FlatButton.icon(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(context,
+                  new MaterialPageRoute(
+                      builder: (builder)=>Profile()));
+            },
             icon: Icon(Icons.person,color: Colors.blue),
             label: Text(
               'MyProfile',

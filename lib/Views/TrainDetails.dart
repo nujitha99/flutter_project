@@ -45,6 +45,11 @@ class TrainDetails extends State<TrainDetailsPage> {
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }),
               expandedHeight: 180.0,
               floating: false,
               pinned: true,

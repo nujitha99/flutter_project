@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Login'),
+          title: Text('Register'),
         ),
         body: Container(
             child: SingleChildScrollView(

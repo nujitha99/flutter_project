@@ -3,6 +3,8 @@ import 'package:flutter/painting.dart';
 import 'package:qr/qr.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+//pages
+import 'MyBooking.dart';
 //void main() => runApp(DigitalTicket());
 
 class DigitalTicket extends StatefulWidget {
@@ -27,7 +29,17 @@ class DigitalTicketState extends State<DigitalTicket> {
       home: Scaffold(
           appBar: new AppBar(
             title: Text('My Recent Booking'),
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => MyBookingPage())
+                  );
+                }),
           ),
+
           body: Container(
             color: Colors.white,
             child: SafeArea(
