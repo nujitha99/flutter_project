@@ -6,15 +6,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 //pages
-import 'package:flutter_app/Views/HomeScreen.dart';
-
-import 'Models/Schedules.dart';
+//import 'package:flutter_app/Views/HomeScreen.dart';
+//
+//import 'Models/Schedules.dart';
 
 void main(){
   runApp(new MaterialApp(
     home: new SplashScreen(),
     routes: <String,WidgetBuilder>{
-    '/HomeScreen' :(BuildContext context) => new HomeScreen()
+    '/HomeScreen' :(BuildContext context) => null//new HomeScreen()
   },
   ));
 }

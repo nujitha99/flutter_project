@@ -14,7 +14,7 @@ class DigitalTicket extends StatefulWidget {
 }
 
 class DigitalTicketState extends State<DigitalTicket> {
-  final String data = "0001";
+  final String data = "0002";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
