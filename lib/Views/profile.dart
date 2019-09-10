@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+void main() => runApp(Profile());
+
 class Profile extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -14,30 +16,30 @@ class ProfileState extends State<Profile>{
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.blue[800],
-        accentColor: Colors.cyan[600],
-          textTheme: TextTheme(body1: TextStyle(color: Colors.black, fontSize: 20.0))
+          brightness: Brightness.dark,
+          primaryColor: Colors.blue[800],
+          accentColor: Colors.cyan[600],
+          textTheme: TextTheme(body1: TextStyle(color: Colors.white70, fontSize: 20.0))
       ),
       home: new Scaffold(
         appBar: AppBar(title: Text('Profile')),
         body: Container(
-          color: Colors.white,
           child: SafeArea(
             child: ListView(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  color: Colors.blueAccent,
+                  padding: EdgeInsets.all(30.0),
                   child: Image.asset('assets/man.png', height: 100.0, width: 100.0,),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(20.0),
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'Name  : ',
+                        'Name   : ',
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: Colors.white30,
                         ),
                       ),
                       Text('Alex John')
@@ -45,13 +47,13 @@ class ProfileState extends State<Profile>{
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(20.0),
                   child: Row(
                     children: <Widget>[
                       Text(
                         'Phone  : ',
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: Colors.white30,
                         ),
                       ),
                       Text('0771234567')
@@ -59,13 +61,13 @@ class ProfileState extends State<Profile>{
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(20.0),
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'Email  : ',
+                        'Email   : ',
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: Colors.white30,
                         ),
                       ),
                       Text('alex@mail.com')
@@ -73,21 +75,21 @@ class ProfileState extends State<Profile>{
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(20.0),
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'NIC  : ',
+                        'NIC      : ',
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: Colors.white30,
                         ),
                       ),
-                      Text('123456789')
+                      Text('123456789v')
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(50.0),
                   child: Column(
                     children: <Widget>[
                       RaisedButton(
