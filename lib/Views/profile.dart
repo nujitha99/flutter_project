@@ -4,14 +4,14 @@ import 'package:train/Views/Drawer.dart';
 
 void main() => runApp(Profile());
 
-class Profile extends StatefulWidget{
+class Profile extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return ProfileState();
   }
 }
 
-class ProfileState extends State<Profile>{
+class ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -20,8 +20,8 @@ class ProfileState extends State<Profile>{
           brightness: Brightness.dark,
           primaryColor: Colors.blue[800],
           accentColor: Colors.cyan[600],
-          textTheme: TextTheme(body1: TextStyle(color: Colors.white70, fontSize: 20.0))
-      ),
+          textTheme: TextTheme(
+              body1: TextStyle(color: Colors.white70, fontSize: 20.0))),
       home: new Scaffold(
         appBar: AppBar(title: Text('Profile')),
         drawer: drawer(),
@@ -32,7 +32,11 @@ class ProfileState extends State<Profile>{
                 Container(
                   color: Colors.blueAccent,
                   padding: EdgeInsets.all(30.0),
-                  child: Image.asset('assets/man.png', height: 100.0, width: 100.0,),
+                  child: Image.asset(
+                    'assets/man.png',
+                    height: 100.0,
+                    width: 100.0,
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.all(20.0),
@@ -112,5 +116,4 @@ class ProfileState extends State<Profile>{
       ),
     );
   }
-
 }

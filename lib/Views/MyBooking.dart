@@ -22,22 +22,29 @@ import 'digitalTicket.dart';
 class MyBookingPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Color(0xFF2d3447),
-      appBar: AppBar(
-        title: Text('MyBooking'),
-        backgroundColor: Color(0xFF2d3447),
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: new ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blue[800],
+        accentColor: Colors.cyan[600],
       ),
-      body: Center(
-        child :Container(
-         // height: MediaQuery.of(context).size.height,
-            child: ListView(
-              children: <Widget>[
-                IntroImage(),
-                MyBookingState()
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('MyBooking'),
+          backgroundColor: Color(0xFF2d3447),
+        ),
+        body: Center(
+          child :Container(
+            // height: MediaQuery.of(context).size.height,
+              child: ListView(
+                children: <Widget>[
+                  IntroImage(),
+                  MyBookingState()
 
-              ],
-            )
+                ],
+              )
+          ),
         ),
       ),
     );

@@ -68,7 +68,7 @@ class MyHomePage extends State<MyApp> {
                             Container(
                               color: Colors.lightGreen,
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(20.0),
+                              padding: EdgeInsets.all(10.0),
                               child: Text(
                                 'Total : Rs. 200',
                                 style: TextStyle(
@@ -89,7 +89,7 @@ class MyHomePage extends State<MyApp> {
                             Container(
                               child: CreditCardForm(
                                 onCreditCardModelChange:
-                                    onCreditCardModelChange,
+                                onCreditCardModelChange,
                               ),
                             ),
                             Container(
@@ -152,27 +152,27 @@ class MyHomePage extends State<MyApp> {
                             ),
                             Container(
                                 child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Checkbox(
-                                  activeColor: Colors.black,
-                                  checkColor: Colors.lightGreen,
-                                  value: checkBox,
-                                  onChanged: (bool value) {
-                                    setState(() {
-                                      checkBox = value;
-                                    });
-                                  },
-                                ),
-                                Container(
-                                  child: Text(
-                                    'I agree to pay using my mobile credit',
-                                    style: TextStyle(color: Colors.black),
-                                    softWrap: true,
-                                  ),
-                                )
-                              ],
-                            )),
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Checkbox(
+                                      activeColor: Colors.black,
+                                      checkColor: Colors.lightGreen,
+                                      value: checkBox,
+                                      onChanged: (bool value) {
+                                        setState(() {
+                                          checkBox = value;
+                                        });
+                                      },
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        'I agree to pay using my mobile credit',
+                                        style: TextStyle(color: Colors.black),
+                                        softWrap: true,
+                                      ),
+                                    )
+                                  ],
+                                )),
                             Container(
                               padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                               child: new PhysicalModel(

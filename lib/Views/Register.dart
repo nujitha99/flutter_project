@@ -77,23 +77,32 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: new ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blue[800],
+        accentColor: Colors.cyan[600],
       ),
-      body: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                _buildTitle(),
-                _Form(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Login'),
+        ),
+        body: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  _buildTitle(),
+                  _Form(),
 
-              ],
-            ),
-          )
+                ],
+              ),
+            )
 
+        ),
       ),
+
 
 
     );

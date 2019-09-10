@@ -23,7 +23,6 @@ import 'Register.dart';
 import 'payment.dart';
 import 'HomeScreen.dart';
 
-
 class LoginPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => new _LoginPageState();
@@ -64,26 +63,31 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: new ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blue[800],
+        accentColor: Colors.cyan[600],
       ),
-      body: Container(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                _buildTitle(),
-                _buildTextFields(),
-                _buildButtons(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Login'),
+        ),
+        body: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  _buildTitle(),
+                  _buildTextFields(),
+                  _buildButtons(),
 
-              ],
-            ),
-          )
-
+                ],
+              ),
+            )
+        ),
       ),
-
-
     );
   }
 
