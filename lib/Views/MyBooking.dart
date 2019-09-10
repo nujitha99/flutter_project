@@ -15,6 +15,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+//pages
+import 'digitalTicket.dart';
+
 
 class MyBookingPage extends StatelessWidget{
   @override
@@ -181,7 +184,11 @@ class CardList extends StatelessWidget{
                     Divider(color: Colors.black38,),
                     Container(
                         alignment: Alignment.bottomRight,
-                        child: OutlineButton(onPressed: (){},
+                        child: OutlineButton(onPressed: (){
+                          Navigator.push(context,  new MaterialPageRoute(
+                              builder: (context) => DigitalTicket())
+                          );
+                        },
                           child: Text('View Ticket',
                             style: TextStyle(
                                 color: Colors.blue

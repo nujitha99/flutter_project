@@ -13,6 +13,7 @@ import 'Login.dart';
 import 'package:train/main.dart';
 import 'TrainDetails.dart';
 import 'SeatBooking.dart';
+import 'profile.dart';
 
 
 class drawer extends StatelessWidget{
@@ -65,7 +66,7 @@ class drawer extends StatelessWidget{
                   Navigator.push(
                       context,
                       new MaterialPageRoute(
-                          builder: (context) => SeatBookingPage() )
+                          builder: (context) => Profile() )
                   );
                 },
 
@@ -74,19 +75,8 @@ class drawer extends StatelessWidget{
                 color: Colors.black26,
               ),
               new ListTile(
-                title: new Text('Register'),
-
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => RegisterPage())
-                  );
-                },
-
-              ),
-              new ListTile(
                 title: new Text('Login'),
+                trailing: new Icon(Icons.input),
 
                 onTap: () {
                   Navigator.push(

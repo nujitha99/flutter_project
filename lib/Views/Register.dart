@@ -17,16 +17,19 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final _nameFilter = new TextEditingController();
   final _emailFilter = new TextEditingController();
+  final _phoneFilter = new TextEditingController();
   final _pswFilter = new TextEditingController();
   final _rePswFilter = new TextEditingController();
 
   String _name = "";
+  String _phoneNumber = "";
   String _email = "";
   String _password = "";
   String _rePassword = "";
 
   _RegisterPageState() {
     _nameFilter.addListener(_nameListen);
+    _phoneFilter.addListener(_phoneNumberListen);
     _emailFilter.addListener(_emailListen);
     _pswFilter.addListener(_pswListen);
     _rePswFilter.addListener(_rePswListen);
@@ -40,6 +43,13 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  void _phoneNumberListen(){
+    if(_phoneFilter.text.isEmpty){
+      _phoneNumber="";
+    }else{
+      _phoneNumber = _phoneFilter.text;
+    }
+  }
   void _emailListen() {
     if (_emailFilter.text.isEmpty) {
       _email = "";
@@ -123,14 +133,18 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       SizedBox(height: 20,),
-                      TextField(
-                        controller: _nameFilter,
+                      TextFormField(
+                        controller: _phoneFilter,
                         decoration: InputDecoration(
                           labelText: 'Your phone number',
 
                           focusedBorder: UnderlineInputBorder(),
 
+
                         ),
+                        validator: (val) =>
+                        val.length < 10 ? 'Password should be 7 digits' : null,
+                        onSaved: (val) => _phoneNumber = val,
                       ),
                       SizedBox(height: 20,),
                       TextField(
@@ -154,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         obscureText: true,
                         validator: (val) =>
-                        val.length < 6 ? 'Password too short' : null,
+                        val.length < 6 ? 'Password should be 7 digits' : null,
                         onSaved: (val) => _password = val,
                       ),
 

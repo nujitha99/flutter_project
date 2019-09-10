@@ -20,7 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //pages
 import'package:train/Models/User.dart';
 import 'Register.dart';
-
+import 'payment.dart';
 import 'HomeScreen.dart';
 
 
@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
      Navigator.push(
          context,
          new MaterialPageRoute(
-             builder: (context) => HomeScreen())
+             builder: (context) => MyApp())
 
          );
    }

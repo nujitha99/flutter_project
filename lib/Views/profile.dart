@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:train/Views/Drawer.dart';
 
 void main() => runApp(Profile());
 
@@ -23,6 +24,7 @@ class ProfileState extends State<Profile>{
       ),
       home: new Scaffold(
         appBar: AppBar(title: Text('Profile')),
+        drawer: drawer(),
         body: Container(
           child: SafeArea(
             child: ListView(

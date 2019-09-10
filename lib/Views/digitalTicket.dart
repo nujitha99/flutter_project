@@ -4,7 +4,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:train/Views/profile.dart';
 
 
-void main() => runApp(DigitalTicket());
+//void main() => runApp(DigitalTicket());
 
 class DigitalTicket extends StatefulWidget {
   @override
