@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-//import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 
 
 
@@ -280,14 +280,18 @@ class _RegisterPageState extends State<RegisterPage> {
     }
     print("check if the $_password word is similar to $_rePassword");
     print("The user is $_name and $_email");
-    final post = {
-      'userName': _nameFilter.text,
-      'userMail': _emailFilter.text,
-      'userPassword': _rePswFilter.text
-    };
+    addData();
   }
- _pressedRegister(){
+  void addData(){
+    var url ="http://10.0.2.2/admin_TrainApp/register.php";
 
- }
+    http.post(url,body:{
+      "userName" : _nameFilter.text,
+      "phoneNumber" : _phoneFilter.text,
+      "userEmail" : _emailFilter.text,
+      "userPassword" : _rePswFilter.text
+    });
+  }
+
 
 }
