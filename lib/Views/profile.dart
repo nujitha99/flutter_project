@@ -24,7 +24,6 @@ class ProfileState extends State<Profile> {
               body1: TextStyle(color: Colors.white70, fontSize: 20.0))),
       home: new Scaffold(
         appBar: AppBar(title: Text('Profile')),
-        drawer: drawer(),
         body: Container(
           child: SafeArea(
             child: ListView(

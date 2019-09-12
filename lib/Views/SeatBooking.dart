@@ -29,7 +29,6 @@ class SeatBookingPage extends StatelessWidget {
       home: Scaffold(
           appBar: AppBar(
             title: Text('Seat Booking'),
-            backgroundColor: Color(0xFF2d3447),
           ),
           body: Container(
             child: Column(

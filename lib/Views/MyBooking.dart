@@ -32,7 +32,6 @@ class MyBookingPage extends StatelessWidget{
       home: Scaffold(
         appBar: AppBar(
           title: Text('MyBooking'),
-          backgroundColor: Color(0xFF2d3447),
         ),
         body: Center(
           child :Container(

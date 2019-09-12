@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-
-//void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 // ignore: must_be_immutable
-class MyHomePage extends State<MyApp> {
+class MyHomePage extends State<MyApp>{
   bool checkBox = false;
   GlobalKey _globalKeyCard = new GlobalKey();
   GlobalKey _globalKeyMobile = new GlobalKey();
