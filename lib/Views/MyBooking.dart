@@ -20,6 +20,7 @@ import 'digitalTicket.dart';
 import 'Drawer.dart';
 
 
+
 class MyBookingPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -33,9 +34,8 @@ class MyBookingPage extends StatelessWidget{
       home: Scaffold(
         appBar: AppBar(
           title: Text('MyBooking'),
-          backgroundColor: Color(0xFF2d3447),
         ),
-        drawer: drawer(),
+        drawer: Drawer(),
         body: Center(
           child :Container(
             // height: MediaQuery.of(context).size.height,
@@ -69,10 +69,10 @@ class _MyBookingState extends State<MyBookingState>{
     return new FutureBuilder<List>(
         future: getData(),
         builder: (context,snapshot){
-        //  print('in');
+          //  print('in');
           if(snapshot.hasError) print(snapshot.hasError);
           return snapshot.hasData?
-              new CardList(list:snapshot.data)
+          new CardList(list:snapshot.data)
               :new Center(child: new CircularProgressIndicator(),);
         }
 
@@ -87,7 +87,7 @@ class CardList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-   //print(list.length);
+    print(list.length);
 
     return new Container(
       height: MediaQuery.of(context).size.height/1.5,
@@ -113,7 +113,7 @@ class CardList extends StatelessWidget{
                       children: <Widget>[
                         Text(list[i]['bookingDate'],
                           style: TextStyle(
-                              color: Colors.white54
+                              color: Colors.black38
                           ),),
 
                       ],
@@ -139,7 +139,7 @@ class CardList extends StatelessWidget{
                               ),
                               Text('Departure',
                                 style: TextStyle(
-                                    color: Colors.white54
+                                    color: Colors.black38
                                 ),)
                             ],
                           ),
@@ -156,7 +156,7 @@ class CardList extends StatelessWidget{
                               Text(list[i]['arrivalTime']),
                               Text('Arrival',
                                 style: TextStyle(
-                                    color: Colors.white54
+                                    color: Colors.black38
                                 ),)
                             ],
                           ),
@@ -193,20 +193,16 @@ class CardList extends StatelessWidget{
                     Divider(color: Colors.black38,),
                     Container(
                         alignment: Alignment.bottomRight,
-                        child: RaisedButton(
-                          onPressed: (){
-                            Navigator.push(context,  new MaterialPageRoute(
-                            builder: (context) => DigitalTicket())
+                        child: OutlineButton(onPressed: (){
+                          Navigator.push(context,  new MaterialPageRoute(
+                              builder: (context) => DigitalTicket())
                           );
                         },
                           child: Text('View Ticket',
-                          style: TextStyle(
-                            color: Colors.blue
-                          ),),
-                          color: Colors.black12,
-
-                        ),
-
+                            style: TextStyle(
+                                color: Colors.blue
+                            ),),
+                        )
                     ),
                   ],
                 ),
@@ -237,25 +233,25 @@ class IntroImage extends StatelessWidget{
         ),
         Container(
           padding: EdgeInsets.all(10.0),
-        child :Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.end,
+          child :Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
 
-          children: <Widget>[
+            children: <Widget>[
 
-            Text('Keep a list of where to travel',
-            style: TextStyle(
-              color: Colors.black54,
-                  fontSize: 30.0,
-              fontWeight: FontWeight.w900
-            ),),
-            Text('Reserve more,Travel more',
-              style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 20.0
-              ),)
-          ],
-        ),)
+              Text('Keep a list of where to travel',
+                style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.w900
+                ),),
+              Text('Reserve more,Travel more',
+                style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 20.0
+                ),)
+            ],
+          ),)
       ],
     );
   }

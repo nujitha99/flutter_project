@@ -87,6 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Register'),
+          leading: IconButton(icon: Icon(Icons.arrow_back), onPressed:()=> Navigator.pop(context)),
         ),
         body: Container(
             child: SingleChildScrollView(

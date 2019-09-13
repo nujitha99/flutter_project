@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text('Login'),
         ),
+        drawer: Drawer(),
         body: Container(
             child: SingleChildScrollView(
               child: Column(
@@ -227,8 +228,9 @@ class _LoginPageState extends State<LoginPage> {
       "userPassword" : _pswFilter.text
     }
     );
-   var datauser= json.decode(response.body);
-   if(datauser.length == 0){
+   var dataUser= json.decode(response.body);
+
+   if(dataUser.length == 0){
      setState(() {
        showDialog(context: context,
         builder: (context){
