@@ -36,7 +36,7 @@ class SeatBookingPage extends StatelessWidget {
               children: <Widget>[
                 CardDetails(),
                 PassengerDet(),
-                SeatsView(),
+               // SeatsView(),
                 PayBtn()
               ],
             ),

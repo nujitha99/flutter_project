@@ -18,6 +18,7 @@ import 'package:train/Views/TrainDetails.dart';
 import 'package:train/Views/MyBooking.dart';
 import 'SearchDelegate.dart';
 import 'profile.dart';
+import 'package:train/Models/Schedules.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -156,7 +157,12 @@ class _searchView extends State<SearchForm> {
                           start: startingPoint.text,
                           end: endingPoint.text,
                           date: date.text,
-                        )));
+                        ),
+
+
+                    ),);
+
+
               },
               icon: Icon(
                 Icons.arrow_forward,

@@ -113,7 +113,7 @@ class CardList extends StatelessWidget{
                       children: <Widget>[
                         Text(list[i]['bookingDate'],
                           style: TextStyle(
-                              color: Colors.black38
+                              color: Colors.white54
                           ),),
 
                       ],
@@ -139,7 +139,7 @@ class CardList extends StatelessWidget{
                               ),
                               Text('Departure',
                                 style: TextStyle(
-                                    color: Colors.black38
+                                    color: Colors.white54
                                 ),)
                             ],
                           ),
@@ -156,7 +156,7 @@ class CardList extends StatelessWidget{
                               Text(list[i]['arrivalTime']),
                               Text('Arrival',
                                 style: TextStyle(
-                                    color: Colors.black38
+                                    color: Colors.white54
                                 ),)
                             ],
                           ),

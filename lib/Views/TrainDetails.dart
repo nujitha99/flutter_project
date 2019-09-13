@@ -12,14 +12,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:train/Models/Schedules.dart';
 
 //pages
 import 'SeatBooking.dart';
 
 class TrainDetailsPage extends StatefulWidget {
-  String start;
-  String end;
-  String date;
+ final String start;
+  final String end;
+  final String date;
   TrainDetailsPage({Key key, @required this.start, this.end, this.date})
       : super(key: key);
   @override
@@ -66,7 +67,7 @@ class TrainDetails extends State<TrainDetailsPage> {
             SliverFillRemaining(
               child: Container(
                 color: Color(0xFF2d3447),
-                child: schedule(),
+                child: schedule(startingPoint,endingPoint),
               ),
             )
           ],
@@ -82,6 +83,7 @@ class MyFlexibleSpaceBar extends StatelessWidget {
   String date;
   MyFlexibleSpaceBar({Key key, @required this.start, this.end, this.date})
       : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,35 +139,41 @@ class MyFlexibleSpaceBar extends StatelessWidget {
       ),
     );
   }
+
+
 }
 
 class schedule extends StatefulWidget {
+String start;
+String end;
+schedule(this.start,this.end);
   @override
-  _scheduleState createState() => new _scheduleState();
+  _scheduleState createState() => new _scheduleState(start,end);
+
 }
 
 class _scheduleState extends State<schedule> {
-  Future<List<Data>> _getData() async {
-    var res = await http.get(
-        "http://ec2-18-221-114-73.us-east-2.compute.amazonaws.com:8080/api/search");
-
-    var jsonData = json.decode(res.body);
-
-    List<Data> datalst = [];
-    for (var item in jsonData) {
-      Data data = Data(item["trainID"], item["journeyDestinations"]);
-      datalst.add(data);
-    }
-    print(datalst.length);
-    return datalst;
-  }
+String start;
+String end;
+_scheduleState(this.start,this.end);
 
   @override
   Widget build(BuildContext context) {
+
+  /*print('Colombo');
+Schedules().fetchData('Kelaniya', 'Colombo Fort').then((value){
+  print(value);
+});
+*/
+ // print(journeydetails);
+
     return new Container(
       child: FutureBuilder(
-        future: _getData(),
+        future: Schedules().fetchData(start,end),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          //print(Schedules().fetchData('Kelaniya', 'Colombo Fort'));
+          //print(snapshot.hasData);
+
           if (snapshot.data == null) {
             return Container(
               child: Center(
@@ -176,9 +184,12 @@ class _scheduleState extends State<schedule> {
               ),
             );
           } else {
-            return ListView.builder(
-                itemCount: snapshot.data.length,
+            return
+              ListView.builder(
+
+                itemCount: snapshot.data == null? 0 : snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
+
                   return Card(
                     child: Container(
                       child: Row(
@@ -190,20 +201,21 @@ class _scheduleState extends State<schedule> {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  snapshot.data[index].catName,
+                                  snapshot.data[index][3],
+                                 // snapshot.data[index].trainName,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w300,
                                       fontSize: 18.0),
                                 ),
                                 Text(
-                                  '1016',
+                                  snapshot.data[index][2],
                                   style: TextStyle(
-                                      color: Colors.black54, fontSize: 14.0),
+                                      color: Colors.white60, fontSize: 14.0),
                                 ),
                                 Text(
                                   'First Class',
                                   style: TextStyle(
-                                      color: Colors.black38, fontSize: 12.0),
+                                      color: Colors.white54, fontSize: 12.0),
                                 )
                               ],
                             ),
@@ -212,16 +224,16 @@ class _scheduleState extends State<schedule> {
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: <Widget>[
-                                Text('8:15 AM'),
+                                Text(snapshot.data[index][0]),
                                 Text(
                                   'Departure',
                                   style: TextStyle(
-                                      color: Colors.black38, fontSize: 13.0),
+                                      color: Colors.white54, fontSize: 13.0),
                                 ),
                                 Text(
                                   'Time',
                                   style: TextStyle(
-                                      color: Colors.black38, fontSize: 13.0),
+                                      color: Colors.white54, fontSize: 13.0),
                                 ),
                               ],
                             ),
@@ -230,16 +242,16 @@ class _scheduleState extends State<schedule> {
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               children: <Widget>[
-                                Text('10:15 AM'),
+                                Text(snapshot.data[index][1]),
                                 Text(
                                   'Arrival',
                                   style: TextStyle(
-                                      color: Colors.black38, fontSize: 13.0),
+                                      color: Colors.white54, fontSize: 13.0),
                                 ),
                                 Text(
                                   'Time',
                                   style: TextStyle(
-                                      color: Colors.black38, fontSize: 13.0),
+                                      color: Colors.white54, fontSize: 13.0),
                                 ),
                               ],
                             ),
@@ -267,7 +279,15 @@ class _scheduleState extends State<schedule> {
       ),
     );
   }
-}
+
+
+
+  }
+
+
+
+
+
 
 class Data {
   // final int journeyId;
