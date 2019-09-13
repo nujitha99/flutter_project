@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:train/Views/HomeScreen.dart';
+import 'MyBooking.dart';
 import 'digitalTicket.dart';
+import 'package:square_in_app_payments/models.dart';
+import 'package:square_in_app_payments/in_app_payments.dart';
 
-//void main() => runApp(MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
@@ -25,6 +29,33 @@ class MyHomePage extends State<MyApp> {
   String cardHolderName = '';
   String cvvCode = '';
   bool isCvvFocused = false;
+
+  void _pay(){
+    InAppPayments.setSquareApplicationId('sq0idp-uT7KWY1vO0_k5medzBX3Uw');
+    InAppPayments.startCardEntryFlow(
+      onCardNonceRequestSuccess: _cardNonceRequestSuccess,
+      onCardEntryCancel: _cardEntryCancel,
+    );
+  }
+
+  void _cardEntryCancel(){
+    //cancelled card entry
+    Navigator.push(context,
+        new MaterialPageRoute(builder: (context) => HomeScreen()));
+  }
+
+  void _cardNonceRequestSuccess(CardDetails result){
+    InAppPayments.completeCardEntry(
+      onCardEntryComplete: _cardEntryComplete,
+    );
+  }
+
+  void _cardEntryComplete(){
+    //success
+    Navigator.push(context,
+        new MaterialPageRoute(builder: (context) => MyBookingPage()));
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,47 +97,53 @@ class MyHomePage extends State<MyApp> {
                 ),
                 body: new TabBarView(
                   children: [
-                    new Container(
+                    new Container( // credit card
                       color: Colors.white,
                       child: SafeArea(
                         child: ListView(
                           scrollDirection: Axis.vertical,
                           children: <Widget>[
                             Container(
-                              color: Colors.lightGreen,
+                              child: Image.asset('assets/square-credit-card-logo.jpg'),
+                              padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+                            ),
+                            Container(
                               alignment: Alignment.center,
-                              padding: EdgeInsets.all(10.0),
+                              padding: EdgeInsets.all(40.0),
                               child: Text(
                                 'Total : Rs. 200',
                                 style: TextStyle(
                                     fontSize: 30.0,
                                     color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                    ),
                               ),
                             ),
-                            Container(
-                              child: CreditCardWidget(
-                                cardNumber: cardNumber,
-                                expiryDate: expiryDate,
-                                cardHolderName: cardHolderName,
-                                cvvCode: cvvCode,
-                                showBackView: isCvvFocused,
-                              ),
-                            ),
-                            Container(
-                              child: CreditCardForm(
-                                onCreditCardModelChange:
-                                onCreditCardModelChange,
-                              ),
-                            ),
+//                            Container(
+//                              child: CreditCardWidget(
+//                                cardNumber: cardNumber,
+//                                expiryDate: expiryDate,
+//                                cardHolderName: cardHolderName,
+//                                cvvCode: cvvCode,
+//                                showBackView: isCvvFocused,
+//                              ),
+//                            ),
+//                            Container(
+//                              child: CreditCardForm(
+//                                onCreditCardModelChange:
+//                                onCreditCardModelChange,
+//                              ),
+//                            ),
                             Container(
                               child: new PhysicalModel(
+
                                 color: Colors.blue,
-                                borderRadius: BorderRadius.circular(25.0),
+                                borderRadius: BorderRadius.circular(40.0),
                                 child: new MaterialButton(
+                                  padding: EdgeInsets.all(20.0),
                                   key: _globalKeyCard,
-                                  child: setUpButtonChild(),
+                                  child: setUpButtonChildCard(),
                                   onPressed: () {
+                                    _pay();
                                     setState(() {
                                       if (_state == 0) {
                                         animateButton();
@@ -205,13 +242,38 @@ class MyHomePage extends State<MyApp> {
                           ],
                         ),
                       ),
-                    ),
+                    ), // mobile
                   ],
                 ),
               ),
             )
         )
     );
+  }
+
+  Widget setUpButtonChildCard() {
+    if (_state == 0) {
+      return new Text(
+        "Enter Card Details",
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 16.0,
+        ),
+      );
+    } else if (_state == 1) {
+      return CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+      );
+    } else {
+      //changes made 9/10/2019 by N.W.R.Amasha
+      //Navigate to the ticket screen
+      return IconButton(
+          icon: Icon(Icons.check),
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context)=> DigitalTicket()));
+          });
+    }
   }
 
   Widget setUpButtonChild() {
