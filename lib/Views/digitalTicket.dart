@@ -5,6 +5,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 //pages
 import 'MyBooking.dart';
+
 //void main() => runApp(DigitalTicket());
 
 class DigitalTicket extends StatefulWidget {
@@ -15,7 +16,7 @@ class DigitalTicket extends StatefulWidget {
 }
 
 class DigitalTicketState extends State<DigitalTicket> {
-  final String data = "hello";
+  final String data = "0001";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,21 +26,19 @@ class DigitalTicketState extends State<DigitalTicket> {
           primaryColor: Colors.blue[800],
           accentColor: Colors.cyan[600],
           textTheme:
-          TextTheme(body1: TextStyle(color: Colors.white, fontSize: 16.0))),
+              TextTheme(body1: TextStyle(color: Colors.white, fontSize: 16.0))),
       home: Scaffold(
           appBar: new AppBar(
             title: Text('My Recent Booking'),
             leading: IconButton(
                 icon: Icon(Icons.arrow_back),
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
                       context,
                       new MaterialPageRoute(
-                          builder: (context) => MyBookingPage())
-                  );
+                          builder: (context) => MyBookingPage()));
                 }),
           ),
-
           body: Container(
             color: Colors.white,
             child: SafeArea(
@@ -98,7 +97,10 @@ class DigitalTicketState extends State<DigitalTicket> {
                                         color: Colors.lightBlue,
                                       ),
                                     ),
-                                    Text(' Galle',textAlign: TextAlign.right,),
+                                    Text(
+                                      ' Galle',
+                                      textAlign: TextAlign.right,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -148,7 +150,10 @@ class DigitalTicketState extends State<DigitalTicket> {
                                         color: Colors.lightBlue,
                                       ),
                                     ),
-                                    Text(' 200',textAlign: TextAlign.right,)
+                                    Text(
+                                      ' 200',
+                                      textAlign: TextAlign.right,
+                                    )
                                   ],
                                 ),
                               )

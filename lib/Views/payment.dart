@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:http/http.dart';
 import 'package:train/Views/HomeScreen.dart';
 import 'MyBooking.dart';
 import 'digitalTicket.dart';
@@ -30,32 +31,57 @@ class MyHomePage extends State<MyApp> {
   String cvvCode = '';
   bool isCvvFocused = false;
 
-  void _pay(){
+  void _pay() {
     InAppPayments.setSquareApplicationId('sq0idp-uT7KWY1vO0_k5medzBX3Uw');
     InAppPayments.startCardEntryFlow(
-      onCardNonceRequestSuccess: _cardNonceRequestSuccess,
-      onCardEntryCancel: _cardEntryCancel,
-    );
+        onCardNonceRequestSuccess: (CardDetails details) {
+      print(details.nonce); // here you get the nonce
+// The following method dismisses the card entry UI
+      // It is required to be called
+      InAppPayments.completeCardEntry(onCardEntryComplete: () async {
+        Response response =
+            await get("http://192.168.1.4:8080?nonce=" + details.nonce);
+
+        await showDialog(
+            context: context,
+            builder: (BuildContext ctx) {
+              return AlertDialog(
+                title: Text("Square Payments API Response"),
+                content: Text(response.body.toString()),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                    },
+                  ),
+                ],
+              );
+            });
+      });
+    }, onCardEntryCancel: () {
+      print("canceled");
+    });
   }
 
-  void _cardEntryCancel(){
-    //cancelled card entry
-    Navigator.push(context,
-        new MaterialPageRoute(builder: (context) => HomeScreen()));
-  }
-
-  void _cardNonceRequestSuccess(CardDetails result){
-    InAppPayments.completeCardEntry(
-      onCardEntryComplete: _cardEntryComplete,
-    );
-  }
-
-  void _cardEntryComplete(){
-    //success
-    Navigator.push(context,
-        new MaterialPageRoute(builder: (context) => MyBookingPage()));
-
-  }
+//  void _cardEntryCancel(){
+//    //cancelled card entry
+//    Navigator.push(context,
+//        new MaterialPageRoute(builder: (context) => HomeScreen()));
+//  }
+//
+//  void _cardNonceRequestSuccess(CardDetails result){
+//    InAppPayments.completeCardEntry(
+//      onCardEntryComplete: _cardEntryComplete,
+//    );
+//  }
+//
+//  void _cardEntryComplete(){
+//    //success
+//    Navigator.push(context,
+//        new MaterialPageRoute(builder: (context) => MyBookingPage()));
+//
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +97,10 @@ class MyHomePage extends State<MyApp> {
               title: Text('Payment'),
               leading: IconButton(
                   icon: Icon(Icons.arrow_back),
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pop(context);
                   }),
             ),
-
             body: new DefaultTabController(
               length: 2,
               child: new Scaffold(
@@ -97,14 +122,16 @@ class MyHomePage extends State<MyApp> {
                 ),
                 body: new TabBarView(
                   children: [
-                    new Container( // credit card
+                    new Container(
+                      // credit card
                       color: Colors.white,
                       child: SafeArea(
                         child: ListView(
                           scrollDirection: Axis.vertical,
                           children: <Widget>[
                             Container(
-                              child: Image.asset('assets/square-credit-card-logo.jpg'),
+                              child: Image.asset(
+                                  'assets/square-credit-card-logo.jpg'),
                               padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
                             ),
                             Container(
@@ -113,9 +140,9 @@ class MyHomePage extends State<MyApp> {
                               child: Text(
                                 'Total : Rs. 200',
                                 style: TextStyle(
-                                    fontSize: 30.0,
-                                    color: Colors.black,
-                                    ),
+                                  fontSize: 30.0,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
 //                            Container(
@@ -135,7 +162,6 @@ class MyHomePage extends State<MyApp> {
 //                            ),
                             Container(
                               child: new PhysicalModel(
-
                                 color: Colors.blue,
                                 borderRadius: BorderRadius.circular(40.0),
                                 child: new MaterialButton(
@@ -143,9 +169,9 @@ class MyHomePage extends State<MyApp> {
                                   key: _globalKeyCard,
                                   child: setUpButtonChildCard(),
                                   onPressed: () {
-                                    _pay();
                                     setState(() {
                                       if (_state == 0) {
+                                        _pay();
                                         animateButton();
                                       }
                                     });
@@ -196,27 +222,27 @@ class MyHomePage extends State<MyApp> {
                             ),
                             Container(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Checkbox(
-                                      activeColor: Colors.black,
-                                      checkColor: Colors.lightGreen,
-                                      value: checkBox,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          checkBox = value;
-                                        });
-                                      },
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        'I agree to pay using my mobile credit',
-                                        style: TextStyle(color: Colors.black),
-                                        softWrap: true,
-                                      ),
-                                    )
-                                  ],
-                                )),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Checkbox(
+                                  activeColor: Colors.black,
+                                  checkColor: Colors.lightGreen,
+                                  value: checkBox,
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      checkBox = value;
+                                    });
+                                  },
+                                ),
+                                Container(
+                                  child: Text(
+                                    'I agree to pay using my mobile credit',
+                                    style: TextStyle(color: Colors.black),
+                                    softWrap: true,
+                                  ),
+                                )
+                              ],
+                            )),
                             Container(
                               padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                               child: new PhysicalModel(
@@ -246,9 +272,7 @@ class MyHomePage extends State<MyApp> {
                   ],
                 ),
               ),
-            )
-        )
-    );
+            )));
   }
 
   Widget setUpButtonChildCard() {
@@ -269,9 +293,9 @@ class MyHomePage extends State<MyApp> {
       //Navigate to the ticket screen
       return IconButton(
           icon: Icon(Icons.check),
-          onPressed: (){
+          onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context)=> DigitalTicket()));
+                MaterialPageRoute(builder: (context) => DigitalTicket()));
           });
     }
   }
@@ -294,9 +318,9 @@ class MyHomePage extends State<MyApp> {
       //Navigate to the ticket screen
       return IconButton(
           icon: Icon(Icons.check),
-          onPressed: (){
+          onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context)=> DigitalTicket()));
+                MaterialPageRoute(builder: (context) => DigitalTicket()));
           });
     }
   }
