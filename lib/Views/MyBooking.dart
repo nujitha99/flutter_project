@@ -88,7 +88,7 @@ class CardList extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    print(list.length);
+
 
     return new Container(
       height: MediaQuery.of(context).size.height/1.5,
@@ -196,7 +196,17 @@ class CardList extends StatelessWidget{
                         alignment: Alignment.bottomRight,
                         child: OutlineButton(onPressed: (){
                           Navigator.push(context,  new MaterialPageRoute(
-                              builder: (context) => DigitalTicket())
+                              builder: (context) => DigitalTicket(
+                                user: list[i]['userName'],
+                                trainName: list[i]['trainName'],
+                                start: list[i]['arrival'],
+                                end: list[i]['departure'],
+                                date: list[i]['date'],
+                                payment: list[i]['payment'],
+                                refno: list[i]['refNo'],
+
+
+                              ))
                           );
                         },
                           child: Text('View Ticket',

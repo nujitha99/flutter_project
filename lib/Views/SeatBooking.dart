@@ -12,11 +12,21 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
+
 import 'package:train/Views/Login.dart';
 
-List selectedSeats = new List();
+
 
 class SeatBookingPage extends StatelessWidget {
+  String start;
+  String end;
+  String startTime;
+  String endTime;
+  String date;
+  String trainName;
+  String trainClass;
+  SeatBookingPage(this.start,this.end,this.startTime,this.endTime,this.date,this.trainName,this.trainClass);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,13 +40,16 @@ class SeatBookingPage extends StatelessWidget {
           appBar: AppBar(
             title: Text('Seat Booking'),
             backgroundColor: Color(0xFF2d3447),
+            leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: (){
+              Navigator.pop(context);
+            }),
           ),
           body: Container(
             child: Column(
               children: <Widget>[
-                CardDetails(),
+                CardDetails(start,end,startTime,endTime,date,trainName,trainClass),
                 PassengerDet(),
-               // SeatsView(),
+                SeatsView(),
                 PayBtn()
               ],
             ),
@@ -46,6 +59,14 @@ class SeatBookingPage extends StatelessWidget {
 }
 
 class CardDetails extends StatelessWidget {
+  String start;
+  String end;
+  String startTime;
+  String endTime;
+  String date;
+  String trainName;
+  String trainClass;
+  CardDetails(this.start,this.end,this.startTime,this.endTime,this.date,this.trainName,this.trainClass);
   @override
   Widget build(BuildContext context) {
     return new Card(
@@ -63,21 +84,21 @@ class CardDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Colombo Fort- Kandy',
+                '$start - $end',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                'Udarata Menike / First Class',
+                '$trainName / $trainClass',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                '12th Dec,2019 @ 10.30 a.m. - 12.30 p.m.',
+                '$date @ $startTime - $endTime',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -94,8 +115,8 @@ class PassengerDet extends StatefulWidget {
 }
 
 class _PassengerDet extends State<PassengerDet> {
-  int _adults = 1;
-  int _children = 1;
+  int _passengers = 1;
+
 
   void _showDialogAdults() {
     showDialog<int>(
@@ -104,28 +125,15 @@ class _PassengerDet extends State<PassengerDet> {
           return new NumberPickerDialog.integer(
             minValue: 1,
             maxValue: 20,
-            title: new Text("No of Adults"),
-            initialIntegerValue: _adults,
+            title: new Text("No of passengers"),
+            initialIntegerValue: _passengers,
           );
         }).then((int value) {
-      setState(() => _adults = value);
+      setState(() => _passengers = value);
     });
   }
 
-  void _showDialogChildren() {
-    showDialog<int>(
-        context: context,
-        builder: (BuildContext context) {
-          return new NumberPickerDialog.integer(
-            minValue: 1,
-            maxValue: 20,
-            title: new Text("No of children"),
-            initialIntegerValue: _children,
-          );
-        }).then((int value) {
-      setState(() => _children = value);
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +147,7 @@ class _PassengerDet extends State<PassengerDet> {
             Container(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Adults : $_adults',
+                'Passengers : $_passengers',
                 style: TextStyle(
                   fontSize: 16.0,
                   // color: Colors.white
@@ -149,22 +157,6 @@ class _PassengerDet extends State<PassengerDet> {
             RaisedButton(
               onPressed: () {
                 _showDialogAdults();
-              },
-              child: Text('Add'),
-            ),
-            Container(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Children : $_children',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  //   color: Colors.white
-                ),
-              ),
-            ),
-            RaisedButton(
-              onPressed: () {
-                _showDialogChildren();
               },
               child: Text('Add'),
             ),
@@ -197,7 +189,7 @@ class _seatsView extends State<SeatsView> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Seats Number $selectedSeats',
+                  'Seats Number '/*${_SeatController().sendSelectedlst()}*/,
                   style: TextStyle(
                     fontSize: 16.0,
                     // color: Colors.white
@@ -205,12 +197,6 @@ class _seatsView extends State<SeatsView> {
                 ),
                 SizedBox(
                   width: 10.0,
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    _SeatController()._clearSeats();
-                  },
-                  child: Text('Clear'),
                 ),
               ],
             )),
@@ -231,9 +217,11 @@ class _seatsView extends State<SeatsView> {
       ],
     );
   }
+
 }
 
 //controller
+List selectedSeats = new List();
 class SeatController extends StatefulWidget {
   final Color color;
   final int index;
@@ -245,6 +233,7 @@ class SeatController extends StatefulWidget {
 }
 
 class _SeatController extends State<SeatController> {
+
   Color cellColor = Colors.blue.shade300;
   String seatNo;
 
@@ -286,32 +275,41 @@ class _SeatController extends State<SeatController> {
           // to reserve the seats
           if (cellColor == Colors.blue.shade300) {
             cellColor = Colors.red.shade300;
+            selectedSeats.add(seatList[index]);
+            print(selectedSeats);
           } else {
             //to undo the selected the seats
             cellColor = Colors.blue.shade300;
+            selectedSeats.remove(seatList[index]);
           }
         }
       }
     });
     print("Container clicked " + seatList[index]);
+
   }
 
-  void _clearSeats() {
+  void _clearSeats(List lst) {
     selectedSeats.clear();
+    setState(() {
+      for(int i=0;i<seatList.length;i++){
+        cellColor =Colors.blue.shade300;
+      }
+    });
   }
-
-  void _selectedSeats(index) {
-    selectedSeats.add(seatList[index]);
-    print(selectedSeats);
+  Future<String> sendSelectedlst(){
+    return seatList[widget.index];
   }
 
   @override
   Widget build(BuildContext context) {
+
     return new GestureDetector(
       onTap: () {
         _changeCell(widget.index);
-        _selectedSeats(widget.index);
+
       },
+
       child: new Container(
         margin: new EdgeInsets.symmetric(horizontal: 1.0, vertical: 1.0),
         decoration: new BoxDecoration(
@@ -348,5 +346,6 @@ class PayBtn extends StatelessWidget {
         ),
       ),
     );
+
   }
 }

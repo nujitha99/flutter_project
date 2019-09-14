@@ -9,14 +9,31 @@ import 'MyBooking.dart';
 //void main() => runApp(DigitalTicket());
 
 class DigitalTicket extends StatefulWidget {
+  String user;
+  String start;
+  String end;
+  String trainName;
+  String date;
+  String payment;
+  String refno;
+  DigitalTicket({Key key, @required this.user,this.start, this.end, this.date,this.payment,this.trainName,this.refno})
+      : super(key: key);
   @override
   State<StatefulWidget> createState() {
-    return DigitalTicketState();
+    return DigitalTicketState(user,start,end,date,payment,trainName,refno);
   }
 }
 
 class DigitalTicketState extends State<DigitalTicket> {
-  final String data = "0001";
+  String user;
+  String start;
+  String end;
+  String trainName;
+  String date;
+  String payment;
+  String refno;
+  DigitalTicketState(this.user,this.start, this.end, this.date,this.payment,this.trainName,this.refno);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -64,7 +81,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                                   color: Colors.lightBlue,
                                 ),
                               ),
-                              Text('Alex John')
+                              Text('$user')
                             ],
                           ),
                         ),
@@ -82,7 +99,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                                         color: Colors.lightBlue,
                                       ),
                                     ),
-                                    Text('Wellawatte'),
+                                    Text('$start'),
                                   ],
                                 ),
                               ),
@@ -98,7 +115,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                                       ),
                                     ),
                                     Text(
-                                      ' Galle',
+                                      '$end',
                                       textAlign: TextAlign.right,
                                     ),
                                   ],
@@ -112,12 +129,12 @@ class DigitalTicketState extends State<DigitalTicket> {
                           child: Row(
                             children: <Widget>[
                               Text(
-                                'No. of Seats : ',
+                                'Train Name : ',
                                 style: TextStyle(
                                   color: Colors.lightBlue,
                                 ),
                               ),
-                              Text('1')
+                              Text('$trainName')
                             ],
                           ),
                         ),
@@ -130,12 +147,12 @@ class DigitalTicketState extends State<DigitalTicket> {
                                 child: Row(
                                   children: <Widget>[
                                     Text(
-                                      'Payment : ',
+                                      'Date : ',
                                       style: TextStyle(
                                         color: Colors.lightBlue,
                                       ),
                                     ),
-                                    Text('Paid')
+                                  Text('$date')
                                   ],
                                 ),
                               ),
@@ -151,7 +168,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                                       ),
                                     ),
                                     Text(
-                                      ' 200',
+                                      '$payment',
                                       textAlign: TextAlign.right,
                                     )
                                   ],
@@ -170,7 +187,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                                   color: Colors.lightBlue,
                                 ),
                               ),
-                              Text(data)
+                              Text('$refno')
                             ],
                           ),
                         ),
@@ -194,7 +211,7 @@ class DigitalTicketState extends State<DigitalTicket> {
                           height: 10,
                         ),
                         QrImage(
-                          data: data,
+                          data: refno,
                           gapless: true,
                           size: 150,
                           errorCorrectionLevel: QrErrorCorrectLevel.H,
