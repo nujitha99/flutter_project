@@ -1,0 +1,30 @@
+body
+{
+    margin:0;
+	padding:0;
+	font-family: sans-sarif;
+	background-size: cover;
+}
+.responsive 
+{
+  width: 100%;
+  height: auto;
+}	
+
+
+table ,th ,td
+{
+	
+	width:90%;
+	margin:auto;
+	border:1px solid black;
+	border-collapse:collapse;
+	text-align:center;
+	font-size:30px;
+	table-layout:fixed;
+	background:#FAE5D3  ;
+	opacity:0.5;
+	color:black;
+	margin-top:200px;
+	margin-bottom:100px;
+}
