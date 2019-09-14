@@ -61,7 +61,7 @@ class MyBookingState extends StatefulWidget{
 }
 class _MyBookingState extends State<MyBookingState>{
   Future<List> getData() async{
-    final response = await http.get("http://10.0.2.2/admin_TrainApp/get.php");
+    final response = await http.get("http://Fermentative-absenc.000webhostapp.com/get.php");
     return json.decode(response.body);
 
   }

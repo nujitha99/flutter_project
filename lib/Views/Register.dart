@@ -284,7 +284,7 @@ class _RegisterPageState extends State<RegisterPage> {
     addData();
   }
   void addData(){
-    var url ="http://10.0.2.2/admin_TrainApp/register.php";
+    var url ="http://Fermentative-absenc.000webhostapp.com/register.php";
 
     http.post(url,body:{
       "userName" : _nameFilter.text,

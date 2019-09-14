@@ -72,7 +72,7 @@ class Schedules{
 
   Future<List> fetchSeatsData() async{
     List conn =[];
-    final response = await http.get('http://10.0.2.2/admin_TrainApp/searchdata.php');
+    final response = await http.get('http://Fermentative-absenc.000webhostapp.com/searchdata.php');
     conn = json.decode(response.body);
 
 

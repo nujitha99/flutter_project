@@ -295,10 +295,3 @@ Schedules().fetchData('Kelaniya', 'Colombo Fort').then((value){
 
 
 
-class Data {
-  // final int journeyId;
-  final String trainId;
-  final String journeyDestinations;
-  // final String journeyTime;
-  Data(this.trainId, this.journeyDestinations);
-}
