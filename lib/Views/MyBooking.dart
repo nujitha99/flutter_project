@@ -32,10 +32,11 @@ class MyBookingPage extends StatelessWidget{
         accentColor: Colors.cyan[600],
       ),
       home: Scaffold(
+
         appBar: AppBar(
           title: Text('MyBooking'),
         ),
-        drawer: Drawer(),
+        drawer: DrawerState(),
         body: Center(
           child :Container(
             // height: MediaQuery.of(context).size.height,

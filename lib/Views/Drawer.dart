@@ -22,10 +22,11 @@ import 'TrainDetails.dart';
 import 'SeatBooking.dart';
 import 'profile.dart';
 
-class drawer extends StatelessWidget {
+class DrawerState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Drawer(
+
       child: ListView(
         children: <Widget>[
           DrawerHeader(

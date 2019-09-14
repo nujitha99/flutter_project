@@ -184,8 +184,14 @@ Schedules().fetchData('Kelaniya', 'Colombo Fort').then((value){
               ),
             );
           } else {
-            return
-              ListView.builder(
+            return snapshot.data.isEmpty? Center(
+                child: Text('There are no trains available',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.white
+                ),),
+              )
+                  :ListView.builder(
 
                 itemCount: snapshot.data == null? 0 : snapshot.data.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -267,7 +273,7 @@ Schedules().fetchData('Kelaniya', 'Colombo Fort').then((value){
                                         context,
                                         new MaterialPageRoute(
                                             builder: (context) =>
-                                                SeatBookingPage()));
+                                                SeatBookingPage(start,end,snapshot.data[index][0],snapshot.data[index][1],'2019-09-10',snapshot.data[index][3],'First Class')));
                                   }))
                         ],
                       ),

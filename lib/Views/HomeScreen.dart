@@ -36,7 +36,8 @@ class HomeScreen extends StatelessWidget {
           centerTitle: true,
           title: Icon(Icons.home),
         ),
-        drawer: drawer(),
+        drawer:Theme(data: ThemeData(brightness: Brightness.dark),
+          child: DrawerState(),),
         body: Container(
           decoration: BoxDecoration(
             //background image
@@ -80,7 +81,6 @@ class _searchView extends State<SearchForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.only(bottom: 150),
         padding: EdgeInsets.all(20.0),
         width: 360,
         height: 280,
@@ -99,6 +99,10 @@ class _searchView extends State<SearchForm> {
                 icon: Icon(Icons.my_location, color: Colors.white),
                 border: OutlineInputBorder(),
                 labelText: 'Choose the starting point',
+                labelStyle: TextStyle(
+                    color: Colors.grey
+                ),
+                hintStyle: TextStyle(color: Colors.black)
 
                 // labelStyle: TextStyle(color: Colors.white)
               ),
@@ -119,6 +123,9 @@ class _searchView extends State<SearchForm> {
                 icon: Icon(Icons.location_on, color: Colors.white),
                 border: OutlineInputBorder(),
                 labelText: 'Choose destination',
+                labelStyle: TextStyle(
+                    color: Colors.grey
+                ),
 
                 // labelStyle: TextStyle(color: Colors.white)
               ),
@@ -133,6 +140,9 @@ class _searchView extends State<SearchForm> {
                 icon: Icon(Icons.calendar_today, color: Colors.white),
                 border: OutlineInputBorder(),
                 hintText: 'Enter the date',
+                hintStyle: TextStyle(
+                  color: Colors.grey
+                )
 
                 // hintStyle: TextStyle(color: Colors.white)
               )),
@@ -204,16 +214,15 @@ class Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: <Widget>[
-          Text('EasyTravel',
-              style: TextStyle(fontSize: 50.0, color: Colors.blue)),
-          Text(
-            'Easiet way to travel across Sri Lanka',
-            style: TextStyle(color: Colors.white),
-          )
-        ],
-      ),
+      margin: EdgeInsets.only(bottom: 10.0),
+      padding: EdgeInsets.all(10.0),
+      child: Center(
+        child: Image.asset('assets/logo.png',
+          width: MediaQuery.of(context).size.width/2,
+          height: MediaQuery.of(context).size.height/5,
+        ),
+
+      )
     );
   }
 }
@@ -225,36 +234,48 @@ class Title extends StatelessWidget {
 class MenuItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        FlatButton.icon(
-            onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => MyBookingPage()));
-            },
-            icon: Icon(Icons.history, color: Colors.blue),
-            label: Text(
-              'MyBooking',
-              style: TextStyle(
-                fontSize: 24.0,
-                color: Colors.white,
-              ),
-            )),
-        FlatButton.icon(
-            onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => Profile()));
-            },
-            icon: Icon(Icons.person, color: Colors.blue),
-            label: Text(
-              'MyProfile',
-              style: TextStyle(
-                fontSize: 24.0,
-                color: Colors.white,
-              ),
-            ))
-      ],
+    return Expanded(
+        child: Align(
+          
+            alignment: FractionalOffset.bottomCenter,
+          child:Container(
+            padding: EdgeInsets.all(10.0),
+            child:  Row(
+
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+              children: <Widget>[
+                FlatButton.icon(
+                    onPressed: () {
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (context) => MyBookingPage()));
+                    },
+                    icon: Icon(Icons.history, color: Colors.blue),
+                    label: Text(
+                      'MyBooking',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        color: Colors.white,
+                      ),
+                    )),
+                FlatButton.icon(
+                    onPressed: () {
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (context) => Profile()));
+                    },
+                    icon: Icon(Icons.person, color: Colors.blue),
+                    label: Text(
+                      'MyProfile',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        color: Colors.white,
+                      ),
+                    ))
+              ],
+            ),
+          )
+        )
+      
     );
   }
 }

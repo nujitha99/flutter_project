@@ -10,7 +10,6 @@ class DataSearch extends SearchDelegate<String>{
 
   final cities=['Colombo Fort','Ella','Maradana','Dematagoda','Kelaniya','Ragama','Ganemulla','Gampaha','Veyangoa','Ganegoda','Pallewela','Galle','Kandy','NuwaraEliya','Jaffna','Wellwatte','Panadura','Badulla'];
 
-
   @override
   List<Widget> buildActions(BuildContext context) {
 

@@ -22,6 +22,7 @@ import'package:train/Models/User.dart';
 import 'Register.dart';
 import 'payment.dart';
 import 'HomeScreen.dart';
+import 'Drawer.dart';
 
 class LoginPage extends StatefulWidget{
   @override
@@ -74,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text('Login'),
         ),
-        drawer: Drawer(),
+        drawer: DrawerState(),
         body: Container(
             child: SingleChildScrollView(
               child: Column(
